@@ -3,6 +3,20 @@ session_start();
 include ("connect.php");
 
 if(!isset($_SESSION["userid"])){
+    $current_user = $_SESSION["userid"];
+    $user = mysqli_fetch_array(
+        $q = mysqli_query($con, "SELECT * FROM users WHERE userid='$current_user'")
+    );
+    if($user['role'] == 'admin'){
+        header("Location: admin_dashboard.php");
+    } else {
+        header("Location: user_dashboard.php");
+    }
+}
+else{
+echo "Hello, $_SESSION[userid]!";
+echo "<br/><a href='logout.php'>Logout</a>";
+}
 ?>
 
 <form method="POST">
@@ -57,10 +71,3 @@ if(!isset($_SESSION["userid"])){
         <a href="register.php" style="display: block; text-align: center; margin-top: 60px;">Register kana Pogi</a>
     </div>
 </form>        
-<?php
-}
-else{
-echo "Hello, $_SESSION[userid]!";
-echo "<br/><a href='logout.php'>Logout</a>";
-}
-?>
