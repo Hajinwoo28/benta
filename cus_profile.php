@@ -80,7 +80,7 @@ if (isset($_POST['cancel_tx'])) {
             <h2>Personal Information</h2>
             <table class="table table-bordered">
                 <tr><th>Username</th><td><?php echo htmlspecialchars($user['username']); ?></td></tr>
-                <tr><th>Full Name</th><td><?php echo htmlspecialchars($user['name']); ?></td></tr>
+                <tr><th>Full Name</th><td><?php echo htmlspecialchars($user['fullname']); ?></td></tr>
                 <tr><th>Contact</th><td><?php echo htmlspecialchars($user['contact']); ?></td></tr>
                 <tr><th>Delivery Address</th><td><?php echo htmlspecialchars($user['address']); ?></td></tr>
             </table>
