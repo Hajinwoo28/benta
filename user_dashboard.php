@@ -7,11 +7,6 @@ if(isset($_SESSION["userid"])){
     $user = mysqli_fetch_array(
         $q = mysqli_query($con, "SELECT * FROM users WHERE userid='$current_user'")
     );
-    if($user['role'] == 'admin'){
-        header("Location: admin_dashboard.php");
-    } else {
-        header("Location: user_dashboard.php");
-    }
 }
 ?>
 <html lang="en">
