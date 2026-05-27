@@ -1,12 +1,12 @@
 <?php
 session_start();
 include ("connect.php");
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
     header('Location: index.php');
     exit;
 
 }
-$shopName = 'Kabayan Express';
+$shopName = 'Bicol Express';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,15 @@ if(isset($_POST["btnsubmit"])){
 
 $category_name = $_POST["category_name"];
 
-mysqli_query($con, "insert into categories(category) values('$category_name')");
+mysqli_query($con, 
+"INSERT INTO categories(
+    category
+) 
+VALUES(
+'$category_name'
+)
+"
+);
 echo "<script>window.location='admin_categories.php';</script>";
 }
 
@@ -69,7 +77,7 @@ echo "<script>window.location='admin_categories.php';</script>";
 </thead>
 <tbody>
 <?php
-$q = mysqli_query($con, "select * from categories order by id desc");
+$q = mysqli_query($con, "SELECT * FROM categories ORDER BY id DESC");
 while($r = mysqli_fetch_array($q)){
 ?>
 <tr>

@@ -1,7 +1,7 @@
 <?php
 include ("connect.php");
 $id = $_GET["id"];
-$q = mysqli_query($con, "select * from productbl where id = $id");
+$q = mysqli_query($con, "SELECT * FROM productbl WHERE id = $id");
 $item = mysqli_fetch_array($q);
 ?>
 <html>
@@ -23,7 +23,7 @@ $item = mysqli_fetch_array($q);
         <?php
         
         $categories = mysqli_query($con,
-            "select * from categories");
+            "SELECT * FROM categories");
 
         while($row = mysqli_fetch_assoc($categories)){
         ?>

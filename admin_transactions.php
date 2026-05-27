@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
     echo "<script>window.location='index.php';</script>";
     exit;
 }
 include("connect.php");
-$shopName = 'Kabayan Express';
-$query = "select t.*, u.username, u.address, u.contact from transactions t left join users u on u.user_id=t.clientid order by t.orderdate desc";
+$shopName = 'Bicol Express';
+$query = "SELECT t.*, u.username, u.address, u.contact FROM transactions t LEFT JOIN users u ON u.user_id=t.clientid ORDER BY t.orderdate desc";
 $res = mysqli_query($con, $query);
 ?>
 
@@ -51,19 +51,22 @@ $res = mysqli_query($con, $query);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = mysqli_fetch_assoc($res)) { ?>
+                    <?php while ($r = mysqli_fetch_assoc($res)) { 
+                    ?>
                     <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['username']; ?></td>
-                        <td><?php echo $row['contact']; ?></td>
-                        <td><?php echo $row['address']; ?></td>
-                        <td><?php echo $row['orderdate']; ?></td>
-                        <td><?php echo $row['status']; ?></td>
+                        <td><?php echo $r['id']; ?></td>
+                        <td><?php echo $r['username']; ?></td>
+                        <td><?php echo $r['contact']; ?></td>
+                        <td><?php echo $r['address']; ?></td>
+                        <td><?php echo $r['orderdate']; ?></td>
+                        <td><?php echo $r['status']; ?></td>
                         <td>
-                            <a href="transaction_view.php?id=<?php echo $row['id']; ?>" class="btn btn-sm btn-primary">View</a>
+                            <a href="transaction_view.php?id=<?php echo $r['id']; ?>" class="btn btn-sm btn-primary">View</a>
                         </td>
                     </tr>
-                    <?php } ?>
+                    <?php 
+                    } 
+                    ?>
                 </tbody>
             </table>
         </div>

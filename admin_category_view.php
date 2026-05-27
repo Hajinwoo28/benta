@@ -1,7 +1,7 @@
 <?php
 include ("connect.php");
 $id = $_GET["id"];
-$q = mysqli_query($con, "select * from categories where id = $id");
+$q = mysqli_query($con, "SELECT * FROM categories WHERE id = $id");
 $category = mysqli_fetch_array($q);
 ?>
 <html>
@@ -16,7 +16,7 @@ $category = mysqli_fetch_array($q);
 <?php
 if(isset($_POST["btnupdate"])){
 $category_name = $_POST["category_name"];
-mysqli_query($con, "update categories set category='$category_name' where id=$id");
+mysqli_query($con, "UPDATE categories SET category='$category_name' WHERE id=$id");
 echo "<script>window.location = 'admin_categories.php';</script>";
 }
 

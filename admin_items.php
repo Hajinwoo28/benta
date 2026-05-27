@@ -1,12 +1,12 @@
 <?php
 session_start();
 include ("connect.php");
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
     header('Location: index.php');
     exit;
 
 }
-$shopName = 'Kabayan Express';
+$shopName = 'Bicol Express';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,7 @@ $shopName = 'Kabayan Express';
         <?php
         
         $categories = mysqli_query($con,
-            "select * from categories");
+            "SELECT * FROM categories");
 
         while($row = mysqli_fetch_assoc($categories)){
         ?>
@@ -120,7 +120,7 @@ echo "<script>window.location='admin_items.php';</script>";
 <?php
 $q = mysqli_query($con,
 
-    "select
+    "SELECT
             productbl.id, 
             productbl.itemname,
             productbl.description,
@@ -129,10 +129,10 @@ $q = mysqli_query($con,
             productbl.img,
             categories.category
      
-     from productbl
+      FROM productbl
 
-     inner join categories
-     on productbl.categoryid = categories.id"
+     INNER JOIN categories
+     ON productbl.categoryid = categories.id"
 );
 while($r = mysqli_fetch_array($q)){
 ?>
