@@ -35,10 +35,10 @@ include ("connect.php");
               $password = $_POST["password"];
               $role = $_POST["role"];
           
-              $q = mysqli_query($con, 
+              mysqli_query($con, 
                   "INSERT INTO users(
                       username, 
-                      name, 
+                      fullname, 
                       contact, 
                       address, 
                       password, 

@@ -27,8 +27,8 @@ $product = mysqli_fetch_array(
     <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body>
-<div class="container" style="text-align: center; padding:50px; max-width:500px; margin:auto; border:1px solid #ccc; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); margin-top: 100px;">
-    <img src="<?php echo $product["img"]; ?>" style = "height: 400px;" class="card-img-top" alt="...">
+<div class="container" style="text-align: center; padding:50px; max-width:500px; margin:auto; border:1px solid #ccc; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); margin-top: 60px;">
+    <img src="<?php echo $product["img"]; ?>" style = "height: 280px;" class="card-img-top" alt="...">
     <h3><?php echo $product['itemname']; ?></h3>
     <p><b>Price:</b> <?php echo $product['price']; ?></p>
     <p><b>Stock:</b> <?php echo $product['quantity']; ?></p>
