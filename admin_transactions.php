@@ -6,7 +6,7 @@ if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
 }
 include("connect.php");
 $shopName = 'Bicol Express';
-$query = "SELECT t.*, u.username, u.address, u.contact FROM transactions t LEFT JOIN users u ON u.user_id=t.clientid ORDER BY t.orderdate desc";
+$query = "SELECT t.*, u.username, a.address, c.contact FROM transactions t LEFT JOIN users u ON u.userid=t.clientid ORDER BY t.orderdate desc";
 $res = mysqli_query($con, $query);
 ?>
 
@@ -51,8 +51,11 @@ $res = mysqli_query($con, $query);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($r = mysqli_fetch_assoc($res)) { 
+                    <?php
+                    if (mysqli_num_rows($res) > 0) {  
+                        while ($r = mysqli_fetch_assoc($res)) { 
                     ?>
+                       
                     <tr>
                         <td><?php echo $r['id']; ?></td>
                         <td><?php echo $r['username']; ?></td>
@@ -65,7 +68,10 @@ $res = mysqli_query($con, $query);
                         </td>
                     </tr>
                     <?php 
-                    } 
+                    }
+                    } else {
+                        echo "<tr><td colspan='7'>No records found</td></tr>";
+                    }
                     ?>
                 </tbody>
             </table>

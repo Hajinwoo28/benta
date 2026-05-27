@@ -8,14 +8,16 @@ if (!isset($_GET['id'])) {
 
 $transaction_id = intval($_GET['id']);
 
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+$userid = isset($_SESSION['userid']) ? $_SESSION['userid'] : 0;
 
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : 'user';
 
-$sql = "select t.*, u.username, u.address, u.contact
-        from transactions t
-        left join users u on u.user_id = t.clientid
-        where t.id = $transaction_id";
+$sql = "SELECT t.*, u.username, a.address, c.contact
+        FROM transactions t
+        LEFT JOIN users u ON u.userid = t.clientid
+        LEFT JOIN addresses a ON a.userid = t.clientid
+        LEFT JOIN contacts c ON c.userid = t.clientid
+        WHERE t.id = $transaction_id";
 
 $result = mysqli_query($con, $sql);
 if (!$result) {
@@ -105,9 +107,9 @@ if (!$transaction) {
             $tid = intval($_POST['tid']);
 
             mysqli_query($con,
-                "update transactions
-                 set status='approved'
-                 where id=$tid");
+                "UPDATE transactions
+                 SET status='approved'
+                 WHERE id=$tid");
 
             echo "<script>
             alert('transaction approved');
@@ -141,9 +143,9 @@ if (!$transaction) {
             $tid = intval($_POST['tid']);
 
             mysqli_query($con,
-                "update transactions
-                 set status='completed'
-                 where id=$tid");
+                "UPDATE transactions
+                 SET status='completed'
+                 WHERE id=$tid");
 
             echo "<script>
             alert('transaction completed');
@@ -181,9 +183,9 @@ if (!$transaction) {
             $tid = intval($_POST['tid']);
 
             mysqli_query($con,
-                "update transactions
-                 set status='cancelled'
-                 where id=$tid");
+                "UPDATE transactions
+                 SET status='cancelled'
+                 WHERE id=$tid");
 
             echo "<script>
             alert('transaction cancelled');
@@ -206,7 +208,7 @@ if (!$transaction) {
   $tid = intval($transaction_id);
 
 $items = mysqli_query($con,
-    "select * from transaction_items where transaction_id=$tid"
+    "SELECT * FROM transaction_items WHERE transaction_id=$tid"
 );
 
     if (mysqli_num_rows($items) > 0) {
@@ -222,7 +224,7 @@ $items = mysqli_query($con,
         </tr>
 
         <?php
-        while ($row = mysqli_fetch_assoc($items)) {
+        while ($r = mysqli_fetch_assoc($items)) {
         ?>
 
         <tr>
@@ -231,16 +233,16 @@ $items = mysqli_query($con,
 
                 <?php
 
-                if ($row['itemname'] != '') {
+                if ($r['itemname'] != '') {
 
-                    echo $row['itemname'];
+                    echo $r['itemname'];
 
                 } else {
 
                     $p = mysqli_query($con,
-                        "select itemname
-                         from productbl
-                         where id=".$row['productid']);
+                        "SELECT itemname
+                         FROM productbl
+                         WHERE id=".$r['productid']);
 
                     $p = mysqli_fetch_assoc($p);
 
@@ -256,17 +258,17 @@ $items = mysqli_query($con,
             </td>
 
             <td>
-                <?php echo $row['quantity']; ?>
+                <?php echo $r['quantity']; ?>
             </td>
 
             <td>
-                <?php echo number_format($row['price'],2); ?>
+                <?php echo number_format($r['price'],2); ?>
             </td>
 
             <td>
                 <?php
                 echo number_format(
-                    $row['quantity'] * $row['price'],
+                    $r['quantity'] * $r['price'],
                     2
                 );
                 ?>
@@ -279,7 +281,8 @@ $items = mysqli_query($con,
     </table>
 
     <?php
-    } else {
+    } 
+    else {
         echo "<p>no items found.</p>";
     }
     ?>
