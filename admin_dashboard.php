@@ -7,6 +7,25 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 include 'connect.php';
+
+$shopName = 'Bicol Express';
+
+$pendingCount = mysqli_num_rows(
+    mysqli_query($con,
+    "SELECT * FROM transactions WHERE status='pending'")
+);
+$approvedCount = mysqli_num_rows(
+    mysqli_query($con,
+    "SELECT * FROM transactions WHERE status='approved'")
+);
+$categoryCount = mysqli_num_rows(
+    mysqli_query($con,
+    "SELECT * FROM categories")
+);
+$itemCount = mysqli_num_rows(
+    mysqli_query($con,
+    "SELECT * FROM productbl")
+);
 ?>
 <html lang="en">
     <head>
@@ -32,23 +51,7 @@ include 'connect.php';
             </div>
         </nav>
         <?php
-            $shopName = 'Bicol Express';
-            $pendingCount = mysqli_num_rows(
-                mysqli_query($con,
-                "select * from transactions where status='pending'")
-            );
-            $approvedCount = mysqli_num_rows(
-                mysqli_query($con,
-                "select * from transactions where status='approved'")
-            );
-            $categoryCount = mysqli_num_rows(
-                mysqli_query($con,
-                "select * from categories")
-            );
-            $itemCount = mysqli_num_rows(
-                mysqli_query($con,
-                "select * from productbl")
-            );
+            
         ?>
         <div class="container mt-4">
             <div class="row mb-4">
