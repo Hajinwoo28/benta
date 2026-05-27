@@ -1,18 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start(); 
-include ("connect.php");
-if(isset($_SESSION["userid"])){
-    $current_user = $_SESSION["userid"];
-    $user = mysqli_fetch_array(
-        $q = mysqli_query($con, "SELECT * FROM users WHERE userid='$current_user'")
-    );
-    if($user['role'] == 'admin'){
-        header("Location: admin_dashboard.php");
-    } else {
-        header("Location: user_dashboard.php");
-    }
-}
+$current_user = $_SESSION["userid"]; 
+include "connect.php";
 ?>
 <html lang="en">
     <head>
