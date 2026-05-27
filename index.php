@@ -1,24 +1,8 @@
 <?php
 session_start();
-include ("connect.php");
-
+include 'connect.php';
 if(!isset($_SESSION["userid"])){
-    $current_user = $_SESSION["userid"];
-    $user = mysqli_fetch_array(
-        $q = mysqli_query($con, "SELECT * FROM users WHERE userid='$current_user'")
-    );
-    if($user['role'] == 'admin'){
-        header("Location: admin_dashboard.php");
-    } else {
-        header("Location: user_dashboard.php");
-    }
-}
-else{
-echo "Hello, $_SESSION[userid]!";
-echo "<br/><a href='logout.php'>Logout</a>";
-}
 ?>
-
 <form method="POST">
     <div class="container" style="text-align: center; margin-top: 100px; border: 1px solid #ccc; border-radius: 5px; padding: 30px; height: 400px; width: 300px; margin-left: auto; margin-right: auto; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
         <h1 style="margin-top: 60px;">Login</h1>
@@ -70,4 +54,11 @@ echo "<br/><a href='logout.php'>Logout</a>";
         ?>
         <a href="register.php" style="display: block; text-align: center; margin-top: 60px;">Register kana Pogi</a>
     </div>
-</form>        
+</form>   
+<?php
+}
+else{
+echo "Hello, $_SESSION[user_id]!";
+echo "<br/><a href='logout.php'>Logout</a>";
+}
+?>     

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("connect.php");
+include'connect.php';
 
 if (!isset($_SESSION["userid"])) {
     die("not logged in");
@@ -95,12 +95,16 @@ while ($r = mysqli_fetch_assoc($q)) {
 ?>
 
 </table>
-<div class="container" style="margin-top: 430px;">
-  <?php $total = $subtotal + 100; ?>
+<div class="container" style="margin-top: 370px;">
+  <table class="table table-striped table-hover>
+    <tr>
+      <td><?php $total = $subtotal + 100; ?></td>
+      <td><p>subtotal: <?php echo $subtotal; ?></p></td>
+      <td><p>shipping: 100</p></td>
+      <td><h3>total: <?php echo $total; ?></h3></td>
+    </tr>
+  </table>
   
-  <p>subtotal: <?php echo $subtotal; ?></p>
-  <p>shipping: 100</p>
-  <h3>total: <?php echo $total; ?></h3>
 </div>
 
 <form method="POST">

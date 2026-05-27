@@ -8,7 +8,7 @@ if (!isset($_SESSION['userid'])) {
 
 $userid = $_SESSION['userid'];
 
-include("connect.php");
+include'connect.php';
 
 $user = mysqli_fetch_assoc(
     mysqli_query($con, 

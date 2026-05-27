@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include("connect.php");
+include'connect.php';
 
 if (!isset($_SESSION["userid"])) {
     die("not logged in");

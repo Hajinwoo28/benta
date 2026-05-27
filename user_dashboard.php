@@ -2,7 +2,9 @@
 <?php
 session_start(); 
 $current_user = $_SESSION["userid"]; 
-include "connect.php";
+
+include ("connect.php");
+
 ?>
 <html lang="en">
     <head>
@@ -31,7 +33,7 @@ include "connect.php";
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                               
-                                <li><a class="dropdown-item" href="cus_profile.php?id=<?php echo $current_user; ?>">profile</a></li>
+                                <li><a class="dropdown-item" href="cus_profile.php?id=<?php echo $current_user; ?>">Profile</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
@@ -49,8 +51,8 @@ include "connect.php";
                 {
             ?>
             <div class= "col-3">
-            <div class="card mb-3 p-4" style="width: 18rem;">
-              <img src="<?php echo $r["img"]; ?>" style = "height: 200px;" class="card-img-top" alt="...">
+            <div class="card mb-3">
+              <img src="<?php echo $r["img"]; ?>"  class="card-img-top" alt="..." style = "height: 200px; !important;">
               <div class="card-body">
                 <h5 class="card-title"><?php echo $r['itemname']; ?></h5>
                   

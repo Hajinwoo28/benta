@@ -24,10 +24,7 @@ include ("connect.php");
             <label>Password:</label><br/>
             <input type="password" name="password" required></input><br/>
             <input type="hidden" name="role" value="user">
-            <form action="user_dashboard.php" method="POST">
-              <input type="submit" name="btnsubmit" value="Save Record" style="margin-top: 20px;">
-            </form>
-      
+            <input type="submit" name="btnsubmit" value="Save Record">
         <?php
           if(isset($_POST["btnsubmit"]))
           {
@@ -56,7 +53,6 @@ include ("connect.php");
                       '$role'
                   )"
               );
-            echo "<script>alert('Record saved'); window.location='user_dashboard.php';</script>";
           }
         ?>
         <a href="index.php" style="display: block; margin-top: 10px;">login</a>
