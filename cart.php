@@ -96,7 +96,7 @@ while ($r = mysqli_fetch_assoc($q)) {
 
 </table>
 <div class="container" style="margin-top: 370px;">
-  <table class="table table-striped table-hover>
+  <table class="table table-striped table-hover">
     <tr>
       <td><?php $total = $subtotal + 100; ?></td>
       <td><p>subtotal: <?php echo $subtotal; ?></p></td>
