@@ -79,6 +79,7 @@ if (isset($_POST['btnupdate'])) {
         <div class="collapse navbar-collapse" id="nav">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="user_dashboard.php">Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" id="navDrop" href="#"
