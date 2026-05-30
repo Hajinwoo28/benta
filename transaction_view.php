@@ -69,6 +69,21 @@ if (isset($_POST['cancel_btn'])) {
          WHERE id=$tid $owner_check
            AND status IN ('pending','approved')"
     );
+
+    /* ── Restore product quantities only if the cancel actually succeeded ── */
+    if (mysqli_affected_rows($con) > 0) {
+        $restore_q = mysqli_query($con,
+            "SELECT productid, quantity FROM transaction_products WHERE transaction_id=$tid"
+        );
+        while ($row = mysqli_fetch_assoc($restore_q)) {
+            $pid = (int)$row['productid'];
+            $qty = (int)$row['quantity'];
+            mysqli_query($con,
+                "UPDATE productbl SET quantity = quantity + $qty WHERE id = $pid"
+            );
+        }
+    }
+
     echo "<script>alert('Transaction cancelled.'); window.location='transaction_view.php?id=$tid';</script>";
     exit;
 }

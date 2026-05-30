@@ -58,7 +58,7 @@ if(!isset($_SESSION["userid"])){
 <?php
 }
 else{
-echo "Hello, $_SESSION[user_id]!";
+echo "Hello, " . htmlspecialchars($_SESSION['userid']) . "!";
 echo "<br/><a href='logout.php'>Logout</a>";
 }
 ?>     

@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <?php
-session_start(); 
-$current_user = $_SESSION["userid"]; 
+session_start();
 
-include ("connect.php");
+if (!isset($_SESSION["userid"])) {
+    header('Location: index.php');
+    exit;
+}
+
+$current_user = $_SESSION["userid"];
+
+include("connect.php");
 
 ?>
 <html lang="en">
@@ -52,11 +58,11 @@ include ("connect.php");
             ?>
             <div class= "col-3">
             <div class="card mb-3">
-              <img src="<?php echo $r["img"]; ?>"  class="card-img-top" alt="..." style = "height: 200px; !important;">
+              <img src="<?php echo htmlspecialchars($r["img"]); ?>"  class="card-img-top" alt="..." style = "height: 200px; !important;">
               <div class="card-body">
-                <h5 class="card-title"><?php echo $r['itemname']; ?></h5>
+                <h5 class="card-title"><?php echo htmlspecialchars($r['itemname']); ?></h5>
                   
-                <p>Description :<br><?php echo $r['description']; ?></p>
+                <p>Description :<br><?php echo htmlspecialchars($r['description']); ?></p>
                 <p class="card-text">QTY: 
                     <?php 
                     if($r['quantity'] == 0){
