@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 session_start();
 include'connect.php';
@@ -15,8 +16,6 @@ if (!$user) {
     die("user not found");
 }
 ?>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -116,7 +115,7 @@ if (isset($_POST['checkout'])) {
     $total = $_POST['total'];
 
 
-    $q = mysqli_query($con, 
+    mysqli_query($con, 
       "INSERT INTO transactions(
           clientid, 
           subtotal, 
@@ -143,7 +142,7 @@ if (isset($_POST['checkout'])) {
 
     while ($r = mysqli_fetch_assoc($cart)) {
 
-        $q = mysqli_query($con, 
+        mysqli_query($con, 
           "INSERT INTO transaction_items
             (
               transaction_id, 
@@ -164,8 +163,8 @@ if (isset($_POST['checkout'])) {
         );
     }
 
-    $q = mysqli_query($con, 
-      "delete from carts where clientid='$userid'"
+    mysqli_query($con, 
+      "DELETE FROM carts WHERE clientid='$userid'"
     );
 
     echo "<script>
