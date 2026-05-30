@@ -261,17 +261,7 @@ $total    = $subtotal + $shipping;
 <!-- ── Main ─────────────────────────────────────────────── -->
 <div class="container mt-4">
 
-<?php if (empty($cart_rows) && !$receipt): ?>
-<!-- Empty cart state -->
-<div class="text-center py-5">
-    <h3>🛒 Your cart is empty</h3>
-    <p class="text-muted mt-2">Looks like you haven't added anything yet.</p>
-    <a href="user_dashboard.php" class="btn btn-primary mt-2">Browse Items</a>
-</div>
-
-<?php else: ?>
-
-<!-- ── Section 1: Cart Items ────────────────────────────── -->
+<!-- ── Section 1: Cart Items (always visible) ────────────── -->
 <h3 class="mb-3">My Cart</h3>
 
 <table class="table table-striped table-hover align-middle">
@@ -286,7 +276,15 @@ $total    = $subtotal + $shipping;
         </tr>
     </thead>
     <tbody>
-    <?php $n = 1; foreach ($cart_rows as $r): ?>
+    <?php if (empty($cart_rows)): ?>
+        <tr>
+            <td colspan="6" class="text-center text-muted py-4">
+                No items in your cart yet.
+                <a href="user_dashboard.php">Browse items</a>
+            </td>
+        </tr>
+    <?php else: ?>
+        <?php $n = 1; foreach ($cart_rows as $r): ?>
         <tr>
             <td><?php echo $n++; ?></td>
             <td><?php echo htmlspecialchars($r['itemname']); ?></td>
@@ -301,11 +299,13 @@ $total    = $subtotal + $shipping;
                 </a>
             </td>
         </tr>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
     </tbody>
 </table>
 
-<!-- ── Section 2: Checkout Summary ─────────────────────── -->
+<!-- ── Section 2: Checkout Summary (only when cart has items) ── -->
+<?php if (!empty($cart_rows)): ?>
 <div class="checkout-card">
     <h4>🧾 Checkout Summary</h4>
 
@@ -375,7 +375,6 @@ $total    = $subtotal + $shipping;
         </a>
     </form>
 </div>
-
 <?php endif; ?>
 </div><!-- /container -->
 
