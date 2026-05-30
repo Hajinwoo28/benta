@@ -6,7 +6,7 @@ if (!isset($_SESSION['userid']) || $_SESSION['role'] !== 'admin') {
 }
 include("connect.php");
 $shopName = 'Bicol Express';
-$query = "SELECT t.*, u.username, a.address, c.contact FROM transactions t LEFT JOIN users u ON u.userid=t.clientid ORDER BY t.orderdate desc";
+$query = "SELECT t.*, u.username, u.address, u.contact FROM transactions t LEFT JOIN users u ON u.userid=t.clientid ORDER BY t.orderdate DESC";
 $res = mysqli_query($con, $query);
 ?>
 
@@ -82,6 +82,3 @@ $res = mysqli_query($con, $query);
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
-
-
-

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-include'connect.php';
+include("connect.php");
 
 if (!isset($_SESSION["userid"])) {
     die("not logged in");
@@ -12,13 +12,13 @@ $current_user = $_SESSION["userid"];
 
 
 $user = mysqli_fetch_array(
-    $q =mysqli_query($con, "SELECT * FROM users WHERE userid='$current_user'")
+    mysqli_query($con, "SELECT * FROM users WHERE userid='$current_user'")
 );
 
 $userid = $user['userid'];
 
 $product = mysqli_fetch_array(
-    $q = mysqli_query($con, "SELECT * FROM productbl WHERE id='$id'")
+    mysqli_query($con, "SELECT * FROM productbl WHERE id='$id'")
 );
 ?>
 <html lang="en">
@@ -46,7 +46,7 @@ $product = mysqli_fetch_array(
             if ($quantity < 1) $quantity = 1;
             if ($quantity > $product['quantity']) $quantity = $product['quantity'];
 
-            $q = mysqli_query($con,
+            mysqli_query($con,
                 "INSERT INTO carts(
                 clientid,itemid,quantity,price)
                  VALUES(
